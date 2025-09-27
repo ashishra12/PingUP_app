@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./configs/db.js";
 import { inngest ,functions} from "./inngest/index.js";
 import { serve } from "inngest/express";
+import { clerkMiddleware } from '@clerk/express'
 
 dotenv.config(); // ✅ Load environment variables from .env
 
@@ -13,6 +14,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use(clerkMiddleware()); // ✅ Add Clerk middleware
 // Connect to MongoDB
 const startServer = async () => {
   try {
